@@ -11,7 +11,6 @@ module.exports = function makeExchange(currency) {
     } else if (num <= 0) {
         newObj = {};
     } else {
-        console.log(arr);
         if (num >= 50) {
             if (num % arr[0] == 0) {
                 var h = num / arr[0];
@@ -19,7 +18,6 @@ module.exports = function makeExchange(currency) {
                 h = Math.floor(num / arr[0]);
                 num = num % arr[0];
             }
-            console.log(num);
         }
         
         if (num < 50) {
@@ -29,7 +27,6 @@ module.exports = function makeExchange(currency) {
                 q = Math.floor(num / arr[1]);
                 num = num % arr[1];
             }
-            console.log(num);
         }
 
         if (num < 25) {
@@ -39,7 +36,6 @@ module.exports = function makeExchange(currency) {
                 d = Math.floor(num / arr[2]);
                 num = num % arr[2];
             }
-            console.log(num);
         }
 
        if (num < 10) {
@@ -49,7 +45,6 @@ module.exports = function makeExchange(currency) {
             n = Math.floor(num / arr[3]);
             num = num % arr[3];
         }
-        console.log(num);
        }
 
         if (num < 5) {
