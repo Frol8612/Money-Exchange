@@ -2,80 +2,31 @@
 module.exports = function makeExchange(currency) {
     // Your code goes here!
     // Return an object containing the minimum number of coins needed to make change
-    let arr = [50, 25, 10, 5, 1],
-        num = currency,
-        newObj = {};
 
-    if (num >= 10000) {
-        return newObj = {error: "You are rich, my friend! We don't have so much coins for exchange"};
-    } else if (num <= 0) {
-        newObj = {};
-    } else {
-        if (num >= 50) {
-            if (num % arr[0] == 0) {
-                var h = num / arr[0];
-            } else {
-                h = Math.floor(num / arr[0]);
-                num = num % arr[0];
-            }
-        }
-        
-        if (num < 50) {
-            if (num % arr[1] == 0) {
-                var q = num / arr[1];
-            } else {
-                q = Math.floor(num / arr[1]);
-                num = num % arr[1];
-            }
-        }
+    const arr = [['H', 50], ['Q', 25], ['D', 10], ['N', 5], ['P', 1]];
 
-        if (num < 25) {
-            if (num % arr[2] == 0) {
-                var d = num / arr[2];
-            } else {
-                d = Math.floor(num / arr[2]);
-                num = num % arr[2];
-            }
-        }
-
-       if (num < 10) {
-        if (num % arr[3] == 0) {
-            var n = num / arr[3];
-        } else {
-            n = Math.floor(num / arr[3]);
-            num = num % arr[3];
-        }
-       }
-
-        if (num < 5) {
-            var p = 0;
-            while (num > 0) {
-                num = num - arr[4];
-                p++;
-            }
-            
-        }
-        newObj.H = h;
-        newObj.Q = q;
-        newObj.D = d;
-        newObj.N = n;
-        newObj.P = p;
-        if (h == 0 || h == undefined) {
-            delete newObj.H;
-        }
-        if (q == 0 || q == undefined) {
-            delete newObj.Q;
-        }
-        if (d == 0 || d == undefined) {
-            delete newObj.D;
-        }
-        if (n == 0 || n == undefined) {
-            delete newObj.N;
-        }
-        if (p == 0 || p == undefined) {
-            delete newObj.P;
-        }
-
+    if (currency > 10000) {
+        return {
+            error:
+                "You are rich, my friend! We don't have so much coins for exchange",
+        };
     }
+
+    const creatObj = (el, cur) => {
+        return {
+            count: Math.floor(cur / el),
+            cur: cur % el,
+        };
+    };
+
+    let newObj = {};
+
+    arr.forEach(el => {
+        if (currency >= el[1]) {
+            let obj = creatObj(el[1], currency, el[0]);
+            currency = obj.cur;
+            newObj[el[0]] = obj.count;
+        }
+    });
     return newObj;
-}
+};
