@@ -23,7 +23,7 @@ module.exports = function makeExchange(currency) {
 
     arr.forEach(el => {
         if (currency >= el[1]) {
-            let obj = creatObj(el[1], currency, el[0]);
+            let obj = creatObj(el[1], currency);
             currency = obj.cur;
             newObj[el[0]] = obj.count;
         }
